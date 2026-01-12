@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xynaxis | Energía Cognitiva</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            blue: '#60a5fa', // Pastel Blue
+                            orange: '#fb923c', // Pastel Orange
+                            gray: '#f8fafc',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .diagram-block {
+            transition: all 0.3s ease;
+        }
+        .diagram-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #60a5fa;
+        }
+        
+        /* Fix for tooltip z-index issue */
+        .tooltip-container {
+            z-index: 50 !important; /* Force higher z-index */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 50)">
+
+    <!-- Navigation -->
+    <nav :class="scrolled ? 'bg-white/90 backdrop-blur shadow-sm py-4' : 'bg-transparent py-6'" class="fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-brand-blue to-brand-orange rounded-lg flex items-center justify-center text-white font-bold">X</div>
+                <span class="text-xl font-bold tracking-tight text-slate-800">Xynaxis</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+                <a href="#vision" class="hover:text-brand-blue transition">Visión</a>
+                <a href="#architecture" class="hover:text-brand-blue transition">Arquitectura</a>
+                <a href="#modules" class="hover:text-brand-blue transition">Módulos</a>
+                <a href="#comparison" class="hover:text-brand-blue transition">Estrategia</a>
+            </div>
+            <button class="bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-slate-800 transition shadow-lg shadow-blue-500/20">
+                Solicitar Demo
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-r from-blue-100 to-orange-100 opacity-50 blur-3xl rounded-full -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold uppercase tracking-wide mb-8 animate-fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                Executive Briefing 2026
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+                El Sistema Nervioso Central <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-orange">para la Energía Cognitiva</span>
+            </h1>
+            
+            <p class="text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Arquitectura Reactiva, IA Soberana y Gobernanza Radical. <br>
+                Diseñado para convertir el caos de la Smart Grid en decisiones estratégicas.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#architecture" class="px-8 py-4 bg-slate-900 text-white rounded-xl font-semibold hover:bg-slate-800 transition shadow-xl shadow-blue-900/10 flex items-center gap-2 group">
+                    Explorar Arquitectura
+                    <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                </a>
+                <button class="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-semibold hover:bg-slate-50 transition flex items-center gap-2">
+                    <i class="fa-solid fa-play text-brand-orange"></i>
+                    Ver Simulación
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem vs Solution (Infographic) -->
+    <section id="vision" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <!-- Conceptual visual of Chaos vs Order -->
+                    <div class="relative h-96 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 p-8">
+                        <!-- Left Side: Chaos -->
+                        <div class="absolute top-8 left-8 w-40"> <!-- Adjusted width for new text -->
+                            <div class="text-xs font-bold text-slate-400 uppercase mb-2">Estado Actual</div>
+                            <div class="flex flex-wrap gap-2"> <!-- Removed opacity-50 -->
+                                <div class="p-2 bg-red-100 rounded text-red-600 text-xs font-medium"><i class="fa-solid fa-database"></i> Silo ERP</div>
+                                <div class="p-2 bg-red-100 rounded text-red-600 text-xs font-medium"><i class="fa-solid fa-bolt"></i> SCADA</div>
+                                <div class="p-2 bg-red-100 rounded text-red-600 text-xs font-medium"><i class="fa-solid fa-file-pdf"></i> Docs</div>
+                            </div>
+                            <div class="mt-3 text-[10px] text-red-400 leading-tight">Integraciones frágiles · Decisiones lentas · Auditoría difícil</div>
+                        </div>
+                        
+                        <!-- Arrow Transition -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                             <div class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-brand-blue">
+                                <i class="fa-solid fa-arrow-right"></i>
+                             </div>
+                        </div>
+
+                        <!-- Right Side: Order (Xynaxis) -->
+                        <div class="absolute bottom-8 right-8 w-56 text-right">
+                            <div class="text-xs font-bold text-brand-blue uppercase mb-2">Con Xynaxis</div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-end gap-2 text-xs font-semibold text-slate-700">
+                                    <span>Desacoplamiento por eventos</span>
+                                    <i class="fa-solid fa-bolt text-brand-orange"></i>
+                                </div>
+                                <div class="flex items-center justify-end gap-2 text-xs font-semibold text-slate-700">
+                                    <span>Trazabilidad gobernada</span>
+                                    <i class="fa-solid fa-check-circle text-green-500"></i>
+                                </div>
+                                <div class="flex items-center justify-end gap-2 text-xs font-semibold text-slate-700">
+                                    <span>Decisión near real-time</span>
+                                    <i class="fa-solid fa-clock text-blue-500"></i>
+                                </div>
+                                <div class="flex items-center justify-end gap-2 text-xs font-semibold text-slate-700">
+                                    <span>IA soberana (perímetro)</span>
+                                    <i class="fa-solid fa-shield-halved text-purple-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Connecting Lines (Decorative) -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 100 Q 150 200 350 300" stroke="#cbd5e1" stroke-width="1" fill="none" stroke-dasharray="4"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Operación cognitiva, sin fuga de perímetro</h2>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        Xynaxis convierte eventos, datos operacionales y conocimiento documental en decisiones accionables. Plataforma modular y event-driven, preparada para industria crítica, con gobierno del dato e IA soberana integrados desde el diseño.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-bolt text-brand-orange text-xs"></i>
+                            </div>
+                            <span class="text-sm text-slate-700"><strong>Event-driven por defecto:</strong> desacopla sistemas, absorbe picos y reduce fragilidad de integraciones.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-shield-halved text-purple-600 text-xs"></i>
+                            </div>
+                            <span class="text-sm text-slate-700"><strong>Gobernanza integrada:</strong> catálogo, linaje y políticas coherentes de acceso para controlar qué se consume, por quién y desde dónde.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-brain text-brand-blue text-xs"></i>
+                            </div>
+                            <span class="text-sm text-slate-700"><strong>IA soberana:</strong> habilita GenAI y RAG sobre conocimiento interno con control de identidad y sin depender de exfiltración de datos.</span>
+                        </li>
+                    </ul>
+
+                    <!-- Tech Chips -->
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded-full border border-slate-200">Event Streaming (Kafka)</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded-full border border-slate-200">Identidad (Keycloak)</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded-full border border-slate-200">Catálogo/Linaje (OpenMetadata)</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded-full border border-slate-200">Observabilidad (ELK/Grafana)</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded-full border border-slate-200">Kubernetes-ready</span>
+                    </div>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#architecture" class="inline-flex justify-center items-center px-6 py-3 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition shadow-lg shadow-blue-900/10">
+                            Ver arquitectura
+                        </a>
+                        <a href="#contact" class="inline-flex justify-center items-center px-6 py-3 bg-white text-slate-700 border border-slate-200 rounded-xl text-sm font-semibold hover:bg-slate-50 transition">
+                            Solicitar workshop técnico
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Architecture Diagram -->
+    <section id="architecture" class="py-24 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-semibold tracking-wider uppercase text-sm">Blueprint Tecnológico</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Arquitectura Modular Desacoplada</h2>
+                <p class="text-slate-500 mt-4"></p> <!-- Removed subtitle content as requested -->
+            </div>
+
+            <!-- CSS Grid Diagram Implementation -->
+            <div class="relative bg-white p-8 rounded-3xl shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-visible" x-data="{ activeModule: 'none' }">
+                
+                <!-- Diagram Container -->
+                <div class="flex flex-col gap-6 max-w-6xl mx-auto relative z-10">
+                    
+                    <!-- Top Layer: Monitor -->
+                    <div class="w-full p-4 bg-sky-50 border border-sky-100 rounded-xl text-center diagram-block cursor-help group relative z-10"
+                         @mouseenter="activeModule = 'monitor'" @mouseleave="activeModule = 'none'">
+                        <div class="font-bold text-sky-800 mb-1">XynMonitor (XMO)</div>
+                        <div class="flex justify-center gap-3 text-2xl text-sky-600 opacity-60 group-hover:opacity-100 transition">
+                            <i class="fa-brands fa-elastic"></i>
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                    </div>
+
+                    <!-- Middle Layer: 5 Columns Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto relative z-0">
+                        
+                        <!-- Col 1: Ingesta (XIE, XSE) - Removed Bridge -->
+                        <div class="md:col-span-2 flex flex-col gap-2">
+                            <!-- Xynaxis Ingest Engine -->
+                            <div class="flex-1 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center text-center p-2 diagram-block cursor-help"
+                                 @mouseenter="activeModule = 'ingest'" @mouseleave="activeModule = 'none'">
+                                <div>
+                                    <div class="text-sm font-bold text-orange-800">Ingest Engine</div>
+                                    <div class="text-[9px] text-orange-600">Ingesta Masiva (XIE)</div>
+                                </div>
+                            </div>
+                            <!-- XynStream Engine -->
+                            <div class="flex-1 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center text-center p-2 diagram-block cursor-help"
+                                 @mouseenter="activeModule = 'stream'" @mouseleave="activeModule = 'none'">
+                                <div>
+                                    <div class="text-sm font-bold text-orange-800">XynStream</div>
+                                    <div class="text-[9px] text-orange-600">Streaming (XSE)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Col 2: Seguridad & Bus (XGD, Bus) -->
+                        <div class="md:col-span-2 flex flex-col gap-2">
+                            <!-- XynGuard -->
+                            <div class="flex-[2] bg-purple-50 border border-purple-100 rounded-xl p-4 flex flex-col justify-center items-center text-center diagram-block cursor-help group"
+                                 @mouseenter="activeModule = 'guard'" @mouseleave="activeModule = 'none'">
+                                <div class="font-bold text-purple-800 mb-2">XynGuard</div>
+                                <i class="fa-solid fa-shield-halved text-2xl text-purple-400 mb-1"></i>
+                                <div class="text-xs text-purple-600">Seguridad & Metadata</div>
+                            </div>
+                            <!-- Bus de Eventos -->
+                            <div class="flex-1 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-center p-2 diagram-block cursor-help"
+                                 @mouseenter="activeModule = 'bus'" @mouseleave="activeModule = 'none'">
+                                <div>
+                                    <div class="text-sm font-bold text-slate-700">Event Bus</div>
+                                    <div class="text-[9px] text-slate-500">Kafka + ZK</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Col 3: LAKE Core (XVT, XRF, XLB, XDP) -->
+                        <div class="md:col-span-4 bg-blue-50 border border-blue-100 rounded-xl p-6 relative diagram-block cursor-help group flex flex-col"
+                             @mouseenter="activeModule = 'lake'" @mouseleave="activeModule = 'none'">
+                            <div class="text-center font-bold text-blue-800 mb-4">XynLake (PostgreSQL)</div>
+                            
+                            <!-- Cylinders Visual -->
+                            <div class="grid grid-cols-2 gap-3 flex-grow">
+                                <div class="bg-white border border-blue-200 rounded-lg flex flex-col items-center justify-center p-2 shadow-sm">
+                                    <span class="text-xs font-bold text-blue-700">XynVault</span>
+                                    <span class="text-[9px] text-blue-400">Raw (XVT)</span>
+                                </div>
+                                <div class="bg-white border border-blue-200 rounded-lg flex flex-col items-center justify-center p-2 shadow-sm">
+                                    <span class="text-xs font-bold text-blue-700">XynRefine</span>
+                                    <span class="text-[9px] text-blue-400">Curado (XRF)</span>
+                                </div>
+                                <div class="bg-white border border-blue-200 rounded-lg flex flex-col items-center justify-center p-2 shadow-sm">
+                                    <span class="text-xs font-bold text-blue-700">XynLab</span>
+                                    <span class="text-[9px] text-blue-400">Sandbox (XLB)</span>
+                                </div>
+                                <div class="bg-white border border-blue-200 rounded-lg flex flex-col items-center justify-center p-2 shadow-sm">
+                                    <span class="text-xs font-bold text-blue-700">XDP</span>
+                                    <span class="text-[9px] text-blue-400">Predictions</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Col 4: Stack Completo (XBR, XMD, XCT, XAR) -->
+                        <div class="md:col-span-2 flex flex-col gap-2">
+                             <!-- XynBridge (Moved here) -->
+                             <div class="flex-1 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center text-center p-2 diagram-block cursor-help"
+                                 @mouseenter="activeModule = 'bridge'" @mouseleave="activeModule = 'none'">
+                                <div>
+                                    <div class="text-sm font-bold text-orange-800">XynBridge</div>
+                                    <div class="text-[9px] text-orange-600">Integración (XBR)</div>
+                                </div>
+                            </div>
+                             <div class="flex-1 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center text-center p-2 diagram-block cursor-help"
+                                 @mouseenter="activeModule = 'model'" @mouseleave="activeModule = 'none'">
+                                <div>
+                                    <div class="text-sm font-bold text-teal-800">XynModel</div>
+                                    <div class="text-[9px] text-teal-600">MLOps (XMD)</div>
+                                </div>
+                            </div>
+                            <div class="flex-1 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center justify-center text-center p-2 diagram-block cursor-help"
+                                 @mouseenter="activeModule = 'cortex'" @mouseleave="activeModule = 'none'">
+                                <div>
+                                    <div class="text-sm font-bold text-indigo-800">XynCortex</div>
+                                    <div class="text-[9px] text-indigo-600">GenAI (XCT)</div>
+                                </div>
+                            </div>
+                            <div class="flex-1 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-center p-2 diagram-block cursor-help"
+                                 @mouseenter="activeModule = 'archive'" @mouseleave="activeModule = 'none'">
+                                <div>
+                                    <div class="text-sm font-bold text-gray-700">XynArchive</div>
+                                    <div class="text-[9px] text-gray-500">Docs (XAR)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Col 5: Serving (XDE, XCE) -->
+                        <div class="md:col-span-2 flex flex-col gap-2">
+                            <div class="flex-1 bg-pink-50 border border-pink-100 rounded-xl p-4 flex flex-col justify-center items-center text-center diagram-block cursor-help group"
+                                 @mouseenter="activeModule = 'dash'" @mouseleave="activeModule = 'none'">
+                                <div class="font-bold text-pink-800 mb-1">XynDash</div>
+                                <i class="fa-solid fa-chart-pie text-2xl text-pink-400 mb-1"></i>
+                                <div class="text-[9px] text-pink-600">Dash Engine (XDE)</div>
+                            </div>
+                            <div class="flex-1 bg-pink-50 border border-pink-100 rounded-xl p-4 flex flex-col justify-center items-center text-center diagram-block cursor-help group"
+                                 @mouseenter="activeModule = 'canvas'" @mouseleave="activeModule = 'none'">
+                                <div class="font-bold text-pink-800 mb-1">XynCanvas</div>
+                                <i class="fa-solid fa-pen-ruler text-2xl text-pink-400 mb-1"></i>
+                                <div class="text-[9px] text-pink-600">Visual (XCE)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Layer: Portal -->
+                    <div class="w-full p-4 bg-slate-100 border border-slate-200 rounded-xl text-center diagram-block cursor-help"
+                         @mouseenter="activeModule = 'portal'" @mouseleave="activeModule = 'none'">
+                        <div class="font-bold text-slate-700 mb-1">XynPortal</div>
+                        <div class="text-xs text-slate-500">Acceso Unificado & IAM (Keycloak)</div>
+                    </div>
+                </div>
+
+                <!-- Info Panel Overlay (Alpine Logic) with Z-Index Fix -->
+                <div class="absolute top-4 right-4 w-72 bg-white/95 backdrop-blur-sm border border-slate-200 p-4 rounded-xl shadow-2xl transition-opacity duration-300 pointer-events-none tooltip-container"
+                     x-show="activeModule !== 'none'"
+                     x-transition:enter="ease-out duration-200"
+                     x-transition:enter-start="opacity-0 translate-y-2"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     style="display: none;">
+                    
+                    <template x-if="activeModule === 'monitor'">
+                        <div>
+                            <h4 class="font-bold text-sky-700 mb-1">XynMonitor (XMO)</h4>
+                            <p class="text-xs text-slate-600">Sistema transversal de observabilidad (ELK/Grafana). Centraliza logs, métricas y trazas de todos los módulos.</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'bridge'">
+                        <div>
+                            <h4 class="font-bold text-orange-700 mb-1">XynBridge (XBR)</h4>
+                            <p class="text-xs text-slate-600">Capa de serving API basada en PostgREST para exponer de forma desacoplada datos/vistas de XynLake a sistemas terceros mediante APIs REST.</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'ingest'">
+                        <div>
+                            <h4 class="font-bold text-orange-700 mb-1">Xynaxis Ingest Engine (XIE)</h4>
+                            <p class="text-xs text-slate-600">Motor de alta capacidad para la recepción masiva y concurrente de datos (Arquitectura Reactiva).</p>
+                        </div>
+                    </template>
+                     <template x-if="activeModule === 'stream'">
+                        <div>
+                            <h4 class="font-bold text-orange-700 mb-1">XynStream Engine (XSE)</h4>
+                            <p class="text-xs text-slate-600">Procesamiento en tiempo real sobre Kafka (Java + Kafka Streams) para lógica compleja en vuelo.</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'bus'">
+                        <div>
+                            <h4 class="font-bold text-slate-700 mb-1">Bus de Eventos</h4>
+                            <p class="text-xs text-slate-600">Backbone asíncrono (Kafka + Zookeeper). Desacopla la ingesta de la persistencia y absorbe picos de carga.</p>
+                        </div>
+                    </template>
+                     <template x-if="activeModule === 'guard'">
+                        <div>
+                            <h4 class="font-bold text-purple-700 mb-1">XynGuard (XGD)</h4>
+                            <p class="text-xs text-slate-600">Seguridad Perimetral y Gobernanza. Integra OpenMetadata para catálogo y linaje de datos.</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'lake'">
+                        <div>
+                            <h4 class="font-bold text-blue-700 mb-1">XynLake (Core)</h4>
+                            <p class="text-xs text-slate-600">
+                                <span class="font-semibold">XVT:</span> Persistencia Raw.<br>
+                                <span class="font-semibold">XRF:</span> Dato Curado.<br>
+                                <span class="font-semibold">XLB:</span> Lab/Sandbox.<br>
+                                <span class="font-semibold">XDP:</span> Data & Predictions (Serving).
+                            </p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'model'">
+                        <div>
+                            <h4 class="font-bold text-teal-700 mb-1">XynModel (XMD)</h4>
+                            <p class="text-xs text-slate-600">Xynaxis Model Engine. Ciclo de vida MLOps, entrenamiento y registro de modelos (MLflow).</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'cortex'">
+                        <div>
+                            <h4 class="font-bold text-indigo-700 mb-1">XynCortex (XCT)</h4>
+                            <p class="text-xs text-slate-600">Núcleo de IA Generativa. Ejecuta modelos RAG/CAG locales (Ollama) sobre documentación.</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'archive'">
+                        <div>
+                            <h4 class="font-bold text-gray-700 mb-1">XynArchive (XAR)</h4>
+                            <p class="text-xs text-slate-600">Repositorio especializado para gestión de activos no estructurados y documentos (S3).</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'dash'">
+                        <div>
+                            <h4 class="font-bold text-pink-700 mb-1">XynDash (XDE)</h4>
+                            <p class="text-xs text-slate-600">Xynaxis Dash Engine + Grafana. Motor de visualización para cuadros de mando operativos.</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'canvas'">
+                        <div>
+                            <h4 class="font-bold text-pink-700 mb-1">XynCanvas (XCE)</h4>
+                            <p class="text-xs text-slate-600">Orquestación visual y exploración analítica (basado en Apache Superset).</p>
+                        </div>
+                    </template>
+                    <template x-if="activeModule === 'portal'">
+                        <div>
+                            <h4 class="font-bold text-slate-700 mb-1">XynPortal</h4>
+                            <p class="text-xs text-slate-600">Punto de entrada unificado. Gestión de identidad (IAM) y control de acceso (Keycloak).</p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Triple Threat Cards -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">La Triple Ventaja Estratégica</h2>
+                <p class="text-slate-500 mt-4 max-w-2xl mx-auto">Por qué Xynaxis encaja en el Plan Estratégico de Naturgy.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1: Speed -->
+                <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:border-brand-orange/30 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center text-brand-orange mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Velocidad Extrema</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Arquitectura reactiva capaz de ingerir millones de eventos IoT/SCADA en tiempo real. Backpressure inteligente para evitar saturaciones en la red.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Apache Kafka Backbone</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> I/O No Bloqueante</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Intelligence -->
+                <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:border-brand-blue/30 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-brand-blue mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">IA Soberana</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Despliegue RAG/CAG privado sobre su documentación técnica. Sus datos nunca salen del perímetro de seguridad corporativo.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-blue"></i> Modelos Locales (Ollama)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-blue"></i> XynArchive Indexing</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Governance -->
+                <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:border-purple-500/30 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-lock text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Gobernanza Radical</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Data Mesh nativo con trazabilidad completa. Sabemos quién accede, cuándo y para qué, garantizando el cumplimiento en infraestructuras críticas.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-600"></i> OpenMetadata Integrado</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-600"></i> Zero Trust Security</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Deep Dive (Interactive Catalog) -->
+    <section id="modules" class="py-24 bg-slate-50 border-y border-slate-200" x-data="{ module: 'portal' }">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Catálogo de Capacidades Xynaxis</h2>
+                <p class="text-slate-500 mt-4">Exploración profunda de los componentes funcionales del ecosistema (Ref. Dossier Técnico).</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8 min-h-[600px]">
+                
+                <!-- Sidebar Navigation (Scrollable list of modules) -->
+                <div class="lg:w-1/4 flex flex-col gap-6 overflow-y-auto max-h-[700px] pr-2 custom-scrollbar">
+                    
+                    <!-- Category: Acceso y Visualización -->
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-4">Acceso & Experiencia</h4>
+                        <div class="space-y-1">
+                            <button @click="module = 'portal'" :class="module === 'portal' ? 'bg-white text-brand-blue shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynPortal</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'portal' ? 'opacity-100 text-brand-blue' : ''"></i>
+                            </button>
+                            <button @click="module = 'canvas'" :class="module === 'canvas' ? 'bg-white text-brand-blue shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynCanvas (XCE)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'canvas' ? 'opacity-100 text-brand-blue' : ''"></i>
+                            </button>
+                             <button @click="module = 'dash'" :class="module === 'dash' ? 'bg-white text-brand-blue shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynDash (XDE)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'dash' ? 'opacity-100 text-brand-blue' : ''"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Category: Ingesta & Transporte -->
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-4">Ingesta & Transporte</h4>
+                        <div class="space-y-1">
+                            <button @click="module = 'bridge'" :class="module === 'bridge' ? 'bg-white text-brand-orange shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynBridge (XBR)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'bridge' ? 'opacity-100 text-brand-orange' : ''"></i>
+                            </button>
+                            <button @click="module = 'ingest'" :class="module === 'ingest' ? 'bg-white text-brand-orange shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>Ingest Engine (XIE)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'ingest' ? 'opacity-100 text-brand-orange' : ''"></i>
+                            </button>
+                            <button @click="module = 'stream'" :class="module === 'stream' ? 'bg-white text-brand-orange shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynStream (XSE)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'stream' ? 'opacity-100 text-brand-orange' : ''"></i>
+                            </button>
+                            <button @click="module = 'bus'" :class="module === 'bus' ? 'bg-white text-brand-orange shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>Bus de Eventos</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'bus' ? 'opacity-100 text-brand-orange' : ''"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Category: Core de Datos (Lake) -->
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-4">Ciclo de Vida del Dato</h4>
+                        <div class="space-y-1">
+                            <button @click="module = 'vault'" :class="module === 'vault' ? 'bg-white text-brand-blue shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynVault (Raw)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'vault' ? 'opacity-100 text-brand-blue' : ''"></i>
+                            </button>
+                            <button @click="module = 'refine'" :class="module === 'refine' ? 'bg-white text-brand-blue shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynRefine (Curado)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'refine' ? 'opacity-100 text-brand-blue' : ''"></i>
+                            </button>
+                            <button @click="module = 'lab'" :class="module === 'lab' ? 'bg-white text-brand-blue shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynLab (Sandbox)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'lab' ? 'opacity-100 text-brand-blue' : ''"></i>
+                            </button>
+                            <button @click="module = 'xdp'" :class="module === 'xdp' ? 'bg-white text-brand-blue shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XDP (Serving)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'xdp' ? 'opacity-100 text-brand-blue' : ''"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Category: IA & Transversal -->
+                     <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-4">IA & Transversal</h4>
+                        <div class="space-y-1">
+                            <button @click="module = 'cortex'" :class="module === 'cortex' ? 'bg-white text-purple-600 shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynCortex (GenAI)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'cortex' ? 'opacity-100 text-purple-600' : ''"></i>
+                            </button>
+                             <button @click="module = 'model'" :class="module === 'model' ? 'bg-white text-purple-600 shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynModel (MLOps)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'model' ? 'opacity-100 text-purple-600' : ''"></i>
+                            </button>
+                             <button @click="module = 'archive'" :class="module === 'archive' ? 'bg-white text-purple-600 shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynArchive (Docs)</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'archive' ? 'opacity-100 text-purple-600' : ''"></i>
+                            </button>
+                            <button @click="module = 'guard'" :class="module === 'guard' ? 'bg-white text-purple-600 shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynGuard</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'guard' ? 'opacity-100 text-purple-600' : ''"></i>
+                            </button>
+                             <button @click="module = 'monitor'" :class="module === 'monitor' ? 'bg-white text-purple-600 shadow-sm ring-1 ring-slate-200' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between group">
+                                <span>XynMonitor</span>
+                                <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity" :class="module === 'monitor' ? 'opacity-100 text-purple-600' : ''"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Content Panel -->
+                <div class="lg:w-3/4 bg-white rounded-2xl border border-slate-200 shadow-lg p-8 relative overflow-y-auto max-h-[700px]">
+                    
+                    <!-- Content: XynPortal -->
+                    <div x-show="module === 'portal'" x-transition.opacity class="animate-fade-in">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-slate-100 rounded-lg text-slate-700"><i class="fa-solid fa-id-card text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynPortal</h3><p class="text-sm text-slate-500">Gestión de Identidad y Acceso Unificado</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Punto central de acceso al ecosistema. Proporciona autenticación robusta y autorización basada en roles (RBAC) mediante integración nativa con Keycloak.</p>
+                            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Centralizar la identidad digital, unificando perfiles y permisos para evitar silos de acceso y simplificar la gestión de usuarios.</p></div>
+                                <div class="bg-blue-50/50 p-5 rounded-xl border border-blue-100"><h4 class="font-bold text-slate-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> <strong>SSO Corporativo:</strong> Integración nativa con LDAP/AD.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> <strong>Seguridad Consistente:</strong> Políticas uniformes en todos los módulos.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynCanvas -->
+                    <div x-show="module === 'canvas'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-pink-100 rounded-lg text-pink-700"><i class="fa-solid fa-pen-ruler text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynCanvas (XCE)</h3><p class="text-sm text-slate-500">Orquestación Visual & Exploración</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Entorno visual basado en Apache Superset que permite diseñar flujos de datos y explorar datasets sin necesidad de código complejo.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Democratizar el acceso a los datos, permitiendo a usuarios técnicos y de negocio colaborar en la creación de valor analítico.</p></div>
+                                <div class="bg-pink-50/50 p-5 rounded-xl border border-pink-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Reduce fricción operativa.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Evita silos de herramientas analíticas.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynDash -->
+                    <div x-show="module === 'dash'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-pink-100 rounded-lg text-pink-700"><i class="fa-solid fa-chart-pie text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynDash (XDE)</h3><p class="text-sm text-slate-500">Visualización de Negocio y Operación</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Motor de visualización avanzada (Xynaxis Dash Engine) integrado con Grafana para la entrega de cuadros de mando operativos en tiempo real.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Transformar datos técnicos en KPIs de negocio accionables, ofreciendo visibilidad E2E del rendimiento de la compañía.</p></div>
+                                <div class="bg-pink-50/50 p-5 rounded-xl border border-pink-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Unifica visión técnica y de negocio.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Acceso inmediato a indicadores estratégicos.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynBridge -->
+                    <div x-show="module === 'bridge'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-orange-100 rounded-lg text-orange-700"><i class="fa-solid fa-plug text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynBridge (XBR)</h3><p class="text-sm text-slate-500">Integración Universal & Adaptadores</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Capa de serving API basada en PostgREST para exponer de forma desacoplada datos/vistas de XynLake a sistemas terceros mediante APIs REST.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Aislar la complejidad de terceros sistemas, normalizando protocolos heterogéneos en eventos estándar para la plataforma.</p></div>
+                                <div class="bg-orange-50/50 p-5 rounded-xl border border-orange-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Reduce drásticamente el coste de integración.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Protege el núcleo ante cambios externos.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: Ingest Engine -->
+                    <div x-show="module === 'ingest'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-orange-100 rounded-lg text-orange-700"><i class="fa-solid fa-filter text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">Xynaxis Ingest Engine (XIE)</h3><p class="text-sm text-slate-500">Recepción Masiva Reactiva</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Motor de alta capacidad basado en arquitectura reactiva (no bloqueante) diseñado para absorber picos masivos de datos sin saturación.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Garantizar que ningún dato se pierda en la frontera, gestionando la entrada de millones de eventos por segundo.</p></div>
+                                <div class="bg-orange-50/50 p-5 rounded-xl border border-orange-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Escalabilidad horizontal elástica.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Validación temprana de calidad.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynStream -->
+                    <div x-show="module === 'stream'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-orange-100 rounded-lg text-orange-700"><i class="fa-brands fa-java text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynStream Engine (XSE)</h3><p class="text-sm text-slate-500">Procesamiento en Tiempo Real</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Servicios de procesamiento 'in-flight' que operan directamente sobre el bus de eventos para aplicar lógica compleja, enriquecimiento y cruces en milisegundos.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Ejecutar reglas de negocio críticas sin esperar a la persistencia del dato, habilitando respuestas inmediatas.</p></div>
+                                <div class="bg-orange-50/50 p-5 rounded-xl border border-orange-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Latencia mínima de decisión.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Enriquecimiento de datos en vuelo.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: Bus Eventos -->
+                    <div x-show="module === 'bus'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-slate-100 rounded-lg text-slate-700"><i class="fa-solid fa-network-wired text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">Bus de Eventos</h3><p class="text-sm text-slate-500">Backbone Asíncrono (Kafka)</p></div>
+                        </div>
+                         <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">El sistema nervioso central de Xynaxis. Una infraestructura de mensajería distribuida basada en Apache Kafka y Zookeeper.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Desacoplar completamente la producción de datos de su consumo, permitiendo que cada sistema opere a su propia velocidad.</p></div>
+                                <div class="bg-orange-50/50 p-5 rounded-xl border border-orange-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> <strong>Backpressure:</strong> Amortigua picos de carga.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Resiliencia y tolerancia a fallos.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynVault -->
+                    <div x-show="module === 'vault'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                         <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-blue-100 rounded-lg text-blue-700"><i class="fa-solid fa-box-archive text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynVault (Raw Layer)</h3><p class="text-sm text-slate-500">Persistencia Inmutable</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">La "Caja Negra" de datos. Almacena la información tal y como llega de la fuente, sin alteraciones, garantizando una copia fiel de la realidad.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Habilitar auditoría forense y la capacidad de "reprocesar la historia" (Replay) si cambian las reglas de negocio.</p></div>
+                                <div class="bg-blue-50/50 p-5 rounded-xl border border-blue-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Trazabilidad total del origen.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Seguridad ante errores de lógica.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynRefine -->
+                    <div x-show="module === 'refine'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-blue-100 rounded-lg text-blue-700"><i class="fa-solid fa-filter text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynRefine (Curated Layer)</h3><p class="text-sm text-slate-500">Normalización y Calidad</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Motor de transformación que limpia, estandariza y enriquece los datos crudos para convertirlos en activos de información confiables.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Generar una "Single Source of Truth" corporativa, eliminando duplicados y corrigiendo errores de formato.</p></div>
+                                <div class="bg-blue-50/50 p-5 rounded-xl border border-blue-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Datos listos para consumo (Business Ready).</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Cumplimiento de estándares de calidad.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynLab -->
+                    <div x-show="module === 'lab'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                         <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-blue-100 rounded-lg text-blue-700"><i class="fa-solid fa-flask text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynLab (Sandbox)</h3><p class="text-sm text-slate-500">Experimentación Segura</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Entorno aislado donde los Data Scientists pueden probar hipótesis y entrenar modelos con datos reales sin riesgo para la producción.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Acelerar la innovación permitiendo fallar rápido y barato en un entorno controlado.</p></div>
+                                <div class="bg-blue-50/50 p-5 rounded-xl border border-blue-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Protección de la estabilidad operativa.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Acceso seguro a datos de alta fidelidad.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XDP -->
+                    <div x-show="module === 'xdp'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-blue-100 rounded-lg text-blue-700"><i class="fa-solid fa-server text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynData & Predictions (XDP)</h3><p class="text-sm text-slate-500">Capa de Despacho Final</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Punto de convergencia donde se unen los datos curados con los resultados de los modelos predictivos para ser servidos a las aplicaciones.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Facilitar el consumo de datos enriquecidos mediante APIs de alto rendimiento y vistas optimizadas.</p></div>
+                                <div class="bg-blue-50/50 p-5 rounded-xl border border-blue-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Desacopla consumo de complejidad interna.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Entrega valor predictivo (IA) integrado.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynCortex -->
+                    <div x-show="module === 'cortex'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                         <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-purple-100 rounded-lg text-purple-700"><i class="fa-solid fa-brain text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynCortex (GenAI)</h3><p class="text-sm text-slate-500">Inteligencia Artificial Soberana</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Motor de IA Generativa que utiliza modelos locales (Ollama) y arquitecturas RAG/CAG para razonar sobre la información corporativa.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Desbloquear el valor del conocimiento no estructurado mediante interfaces de lenguaje natural seguras.</p></div>
+                                <div class="bg-purple-50/50 p-5 rounded-xl border border-purple-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> <strong>Privacidad Total:</strong> Datos nunca salen de casa.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Automatización cognitiva de procesos.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynModel -->
+                    <div x-show="module === 'model'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-teal-100 rounded-lg text-teal-700"><i class="fa-solid fa-microchip text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynModel (MLOps)</h3><p class="text-sm text-slate-500">Ciclo de Vida de Modelos</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                            <p class="text-lg text-slate-600 mb-6">Stack tecnológico (MLflow + Airflow) para estandarizar la creación, entrenamiento y despliegue de modelos predictivos.</p>
+                             <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Pasar del "experimento en notebook" al "modelo en producción" de forma robusta y reproducible.</p></div>
+                                <div class="bg-teal-50/50 p-5 rounded-xl border border-teal-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Trazabilidad del entrenamiento.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Gestión de versiones de algoritmos.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynArchive -->
+                    <div x-show="module === 'archive'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-gray-100 rounded-lg text-gray-700"><i class="fa-solid fa-file-contract text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynArchive (Docs)</h3><p class="text-sm text-slate-500">Repositorio No Estructurado</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                             <p class="text-lg text-slate-600 mb-6">Almacenamiento escalable de objetos (S3 Compatible) para documentos, imágenes y archivos técnicos.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Romper los silos documentales y preparar la información para su ingesta por motores de IA.</p></div>
+                                <div class="bg-gray-100/50 p-5 rounded-xl border border-gray-200"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Fuente única para RAG/CAG.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Bajo coste de almacenamiento.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynGuard -->
+                    <div x-show="module === 'guard'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                         <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-purple-100 rounded-lg text-purple-700"><i class="fa-solid fa-shield-halved text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynGuard (Security & Gov)</h3><p class="text-sm text-slate-500">Gobierno y Protección Perimetral</p></div>
+                        </div>
+                         <div class="prose prose-slate max-w-none">
+                             <p class="text-lg text-slate-600 mb-6">Módulo transversal que combina seguridad perimetral (Zero Trust) con gobierno del dato (Catálogo y Linaje con OpenMetadata).</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Garantizar quién accede a qué, y saber de dónde viene cada dato (Data Lineage).</p></div>
+                                <div class="bg-purple-50/50 p-5 rounded-xl border border-purple-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Cumplimiento normativo (Auditoría).</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Control de acceso granular.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: XynMonitor -->
+                    <div x-show="module === 'monitor'" x-transition.opacity class="animate-fade-in" style="display: none;">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="p-3 bg-sky-100 rounded-lg text-sky-700"><i class="fa-solid fa-heart-pulse text-2xl"></i></div>
+                            <div><h3 class="text-2xl font-bold text-slate-900">XynMonitor (Observability)</h3><p class="text-sm text-slate-500">Salud Integral del Sistema</p></div>
+                        </div>
+                        <div class="prose prose-slate max-w-none">
+                             <p class="text-lg text-slate-600 mb-6">Stack de observabilidad (ELK + Grafana) que centraliza logs, métricas y trazas para una operación proactiva.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-5 rounded-xl border border-slate-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-brand-blue"></i> Propósito</h4><p class="text-sm text-slate-600">Reducir el tiempo de resolución de incidencias (MTTR) y predecir saturaciones antes de que ocurran.</p></div>
+                                <div class="bg-sky-50/50 p-5 rounded-xl border border-sky-100"><h4 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-star text-brand-orange"></i> Valor Añadido</h4><ul class="text-sm text-slate-600 space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Visibilidad técnica completa.</li><li><i class="fa-solid fa-check text-green-500 mr-1"></i> Detección temprana de anomalías.</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section id="comparison" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-brand-blue font-semibold tracking-wider uppercase text-sm">Estrategia</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Adopción incremental, impacto rápido</h2>
+                <p class="text-slate-500 mt-4 max-w-2xl mx-auto">
+                    Xynaxis moderniza sin reescribir el core: entra por integración y eventos, consolida gobierno del dato y habilita IA soberana cuando el perímetro lo exige.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <!-- Card 1: LAND -->
+                <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <span class="text-xs font-bold text-brand-orange bg-orange-100 px-2 py-1 rounded mb-4 inline-block">LAND</span>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Conectar sin fricción</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Integra ERP/SCADA/IoT/Docs y desacopla por eventos, reduciendo integraciones punto a punto.
+                    </p>
+                </div>
+
+                <!-- Card 2: EXPAND -->
+                <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <span class="text-xs font-bold text-brand-blue bg-blue-100 px-2 py-1 rounded mb-4 inline-block">EXPAND</span>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Gobernar como activo</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Catálogo, linaje y políticas coherentes para controlar consumo, calidad y trazabilidad.
+                    </p>
+                </div>
+
+                <!-- Card 3: AUTOMATE -->
+                <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <span class="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded mb-4 inline-block">AUTOMATE</span>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Decidir y automatizar</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Serving multi-canal y GenAI/RAG local cuando la soberanía del dato es requisito.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="overflow-hidden rounded-xl border border-slate-200 shadow-sm">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
+                            <th class="p-6">Dimensión</th>
+                            <th class="p-6">Monolito Tradicional</th>
+                            <th class="p-6 text-brand-blue bg-blue-50/50">Plataforma Xynaxis</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm">
+                        <tr>
+                            <td class="p-6 font-semibold text-slate-900">Licenciamiento</td>
+                            <td class="p-6 text-slate-500">Costoso, por usuario/núcleo (Vendor Lock-in)</td>
+                            <td class="p-6 text-brand-blue font-semibold bg-blue-50/30">Basado en Nodos / Open Source</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-semibold text-slate-900">Escalabilidad</td>
+                            <td class="p-6 text-slate-500">Vertical (Hardware más grande)</td>
+                            <td class="p-6 text-brand-blue font-semibold bg-blue-50/30">Horizontal Elástica (K8s)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-semibold text-slate-900">IA & Analytics</td>
+                            <td class="p-6 text-slate-500">Módulos extra, datos en nube pública</td>
+                            <td class="p-6 text-brand-blue font-semibold bg-blue-50/30">Nativa y Soberana (Local LLMs)</td>
+                        </tr>
+                         <tr>
+                            <td class="p-6 font-semibold text-slate-900">Agilidad</td>
+                            <td class="p-6 text-slate-500">Meses para un nuevo reporte</td>
+                            <td class="p-6 text-brand-blue font-semibold bg-blue-50/30">Semanas (Modularidad)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-semibold text-slate-900">Gobernanza</td>
+                            <td class="p-6 text-slate-500">Manual / Dispersa</td>
+                            <td class="p-6 text-brand-blue font-semibold bg-blue-50/30">Integrada (Linaje E2E)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-semibold text-slate-900">Seguridad</td>
+                            <td class="p-6 text-slate-500">Perímetro rígido</td>
+                            <td class="p-6 text-brand-blue font-semibold bg-blue-50/30">Zero Trust / IAM Unificado</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-semibold text-slate-900">Integración</td>
+                            <td class="p-6 text-slate-500">Punto a punto (Espagueti)</td>
+                            <td class="p-6 text-brand-blue font-semibold bg-blue-50/30">Event-Driven (Desacoplada)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+            <div class="col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-6 h-6 bg-gradient-to-br from-brand-blue to-brand-orange rounded-md flex items-center justify-center text-white text-xs font-bold">X</div>
+                    <span class="text-lg font-bold">Xynaxis</span>
+                </div>
+                <p class="text-slate-400 text-sm max-w-sm mb-6">
+                    Potenciando la transición energética con datos inteligentes. Una solución de arquitectura para la industria crítica.
+                </p>
+            </div>
+            <div>
+                <h5 class="font-bold mb-4">Plataforma</h5>
+                <ul class="space-y-2 text-sm text-slate-400">
+                    <li><a href="#" class="hover:text-white transition">XynStream</a></li>
+                    <li><a href="#" class="hover:text-white transition">XynCortex AI</a></li>
+                    <li><a href="#" class="hover:text-white transition">Seguridad</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-bold mb-4">Contacto</h5>
+                <ul class="space-y-2 text-sm text-slate-400">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-envelope"></i> arquitectura@xynaxis.io</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot"></i> Madrid, España</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
+            &copy; 2026 Xynaxis Architecture Team. Propuesta confidencial para Naturgy.
+        </div>
+    </footer>
+
+</body>
+</html>
